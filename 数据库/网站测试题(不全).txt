@@ -1,0 +1,190 @@
+https://121.36.214.185/SOP/
+
+1.1
+with test as
+(select ID,COURSE_ID,count(*) temp
+from takes
+group by ID,COURSE_ID
+having count(*)>=2
+)
+select NAME,TITLE,temp
+from(student join test on student.ID=test.ID)join course on test.COURSE_ID=course.COURSE_ID
+
+1.2
+select a.ID,a.NAME
+from student a
+where a.ID not in 
+(select ID
+from takes
+)
+
+1.3
+select TITLE,SEC_ID,YEAR,SEMESTER
+from takes join course on takes.COURSE_ID=course.COURSE_ID
+where GRADE is null
+
+1.4
+第一种方法：
+select a.ID,a.NAME,a.DEPT_NAME
+from student a join instructor b on a.DEPT_NAME=b.DEPT_NAME
+group by a.ID,a.NAME,a.DEPT_NAME
+having count(b.ID)>=4
+第二种方法：
+with temp as 
+(
+select b.DEPT_NAME
+from instructor b
+group by b.DEPT_NAME
+having count(b.ID)>=4
+)
+select s.ID,s.NAME,s.DEPT_NAME
+from student s 
+where s.DEPT_NAME in 
+(
+select DEPT_NAME
+from temp
+)
+
+1.5
+select b.DEPT_NAME,b.BUILDING,count(a.ID)
+from instructor a join department b on a.DEPT_NAME=b.DEPT_NAME
+where b.DEPT_NAME in 
+(
+select c.DEPT_NAME
+from department c join instructor d on c.DEPT_NAME=d.DEPT_NAME
+where d.NAME like '%世%'
+)
+group by b.DEPT_NAME,b.BUILDING
+
+2.1
+
+
+2.2
+select a.COURSE_ID,b.YEAR,b.SEMESTER,b.SEC_ID,
+sum(case when b.GRADE in ('A+','A','A-') then 1 else 0 end),
+sum(case when b.GRADE in ('B+','B','B-') then 1 else 0 end),
+sum(case when b.GRADE in ('C+','C','C-') then 1 else 0 end),
+sum(case when b.GRADE in ('D+','D','D-') then 1 else 0 end),
+sum(case when b.GRADE in ('F+','F','F-') then 1 else 0 end),
+sum(case when b.GRADE is null then 1 else 0 end)
+from takes b join course a on a.COURSE_ID=b.COURSE_ID
+group by a.COURSE_ID,b.YEAR,b.SEMESTER,b.SEC_ID
+
+2.3
+
+
+2.1
+SELECT b.COURSE_ID,b.TITLE,b.sss
+FROM (SELECT a.COURSE_ID,a.TITLE,sum(s) sss
+FROM (SELECT c2.COURSE_ID,c2.TITLE,(SELECT COUNT(*) FROM (SELECT s1.COURSE_ID,COUNT(*) FROM section s1 GROUP BY s1.COURSE_ID,s1.SEC_ID,s1.SEMESTER,s1.YEAR) ss WHERE ss.COURSE_ID=c2.COURSE_ID) s
+FROM COURSE c2
+WHERE c2.COURSE_ID NOT IN (SELECT t1.COURSE_ID
+FROM TAKES t1
+WHERE t1.GRADE LIKE '%F%'
+GROUP BY t1.COURSE_ID)) a
+GROUP BY a.COURSE_ID,a.TITLE) b
+
+
+
+
+
+
+3.3
+with a as (SELECT DENSE_RANK() OVER (ORDER BY s1.ID ASC) n,s1.ID ID,s1.NAME NAME 
+FROM STUDENT s1) 
+SELECT ID,NAME
+FROM a
+WHERE n>5 AND n<11
+
+3.5
+SELECT t1.ID,s1.NAME,t1.COURSE_ID,COUNT(*) x1,
+(SELECT COUNT(*) 
+FROM TAKES t2 
+WHERE t2.GRADE IS NOT NULL AND t2.GRADE LIKE 'F%' AND t2.ID=t1.ID AND t2.COURSE_ID=t1.COURSE_ID) x2
+FROM TAKES t1 JOIN STUDENT s1 ON t1.ID=s1.ID 
+GROUP BY t1.ID,s1.NAME,t1.COURSE_ID
+HAVING COUNT(*)>1
+
+2.4
+with conec as(
+select s.ID,
+       s.NAME,
+       tea.ID,
+       ins.NAME,
+       s.NAME||ins.NAME st_name
+from student s
+    join takes t on s.ID = t.ID
+    join section sec on sec.COURSE_ID = t.COURSE_ID
+        and sec.SEC_ID = t.SEC_ID
+        and t.YEAR =sec.YEAR
+        and t.SEMESTER = sec.SEMESTER     
+    join teaches tea on tea.COURSE_ID = sec.COURSE_ID
+        and tea.SEC_ID = sec.SEC_ID
+        and tea.YEAR = sec.YEAR
+        and tea.SEMESTER = sec.SEMESTER
+    join instructor ins on ins.ID = tea.ID 
+),
+adviCP as(
+select 
+    s.id s_id,
+    s.NAME s_name,
+    ins.ID ins_id,
+    ins.NAME ins_name,
+    s.NAME||ins.NAME si_name
+from student s
+    join advisor ad on s.ID = ad.S_ID
+    join instructor ins on  ad.I_ID = ins.ID
+)
+select distinct adviCP.s_name,adviCP.ins_name
+from conec join adviCP on conec.st_name = adviCP.si_name 
+
+
+2.1
+SELECT b.COURSE_ID,b.TITLE,b.sss
+FROM (
+SELECT a.COURSE_ID,a.TITLE,sum(s) sss
+FROM (SELECT c2.COURSE_ID,c2.TITLE,
+(SELECT COUNT(*)
+FROM 
+(SELECT s1.COURSE_ID,COUNT(*) 
+FROM section s1
+GROUP BY s1.COURSE_ID,s1.SEC_ID,s1.SEMESTER,s1.YEAR) ss 
+WHERE ss.COURSE_ID=c2.COURSE_ID) s
+FROM COURSE c2
+WHERE c2.COURSE_ID NOT IN (SELECT t1.COURSE_ID
+FROM TAKES t1
+WHERE t1.GRADE LIKE '%F%'
+GROUP BY t1.COURSE_ID)) a
+GROUP BY a.COURSE_ID,a.TITLE) b
+3.4
+SELECT s1.ID,s1.NAME,COUNT(DISTINCT t1.COURSE_ID) 
+FROM TAKES t1 JOIN STUDENT s1 ON t1.ID=s1.ID
+WHERE t1.GRADE IS NOT NULL AND t1.COURSE_ID NOT IN 
+(SELECT t2.COURSE_ID 
+FROM TAKES t2 JOIN STUDENT s2 ON t2.ID=s2.ID
+WHERE t2.GRADE IS NOT NULL AND t2.GRADE NOT LIKE 'F%' AND t2.ID=t1.ID)
+GROUP BY s1.ID,s1.NAME
+3.2
+SELECT s1.NAME,s1.DEPT_NAME
+FROM (SELECT t1.GRADE,t1.ID,c2.DEPT_NAME,t1.COURSE_ID FROM TAKES t1 JOIN COURSE c2 ON t1.COURSE_ID=c2.COURSE_ID) a
+JOIN STUDENT s1 ON a.ID=s1.ID
+WHERE a.GRADE IS NOT NULL AND a.GRADE NOT LIKE 'F%' AND a.DEPT_NAME=s1.DEPT_NAME 
+GROUP BY s1.NAME,s1.DEPT_NAME
+HAVING COUNT(a.COURSE_ID)=
+(SELECT COUNT(c1.COURSE_ID) s
+FROM COURSE c1 RIGHT JOIN DEPARTMENT d1 ON c1.DEPT_NAME=d1.DEPT_NAME
+WHERE s1.DEPT_NAME=d1.DEPT_NAME)
+2.4
+WITH x1 AS (SELECT a.ID s_id,t2.ID t_id
+FROM (SELECT t1.ID,t1.COURSE_ID,t1.SEC_ID,t1.SEMESTER,t1."YEAR"
+FROM TAKES t1 JOIN SECTION s1 ON t1.COURSE_ID=s1.COURSE_ID AND t1.SEC_ID=s1.SEC_ID AND t1.SEMESTER=s1.SEMESTER AND t1."YEAR"=s1."YEAR") a
+JOIN TEACHES t2 ON t2.COURSE_ID=a.COURSE_ID AND t2.SEC_ID=a.SEC_ID AND t2.SEMESTER=a.SEMESTER AND t2."YEAR"=a."YEAR"),
+x2 AS (SELECT b.ID s_id,b.NAME s_name,b.I_ID i_id,i1.NAME i_name
+FROM (SELECT s2.ID,s2.NAME,a1.I_ID 
+FROM STUDENT s2 JOIN ADVISOR a1 ON s2.ID=a1.S_ID) b
+JOIN INSTRUCTOR i1 ON i1.ID=b.I_ID)
+SELECT x2.s_name,x2.i_name
+FROM x1 JOIN x2 ON x1.s_id=x2.s_id
+WHERE x1.t_id=x2.i_id
+GROUP BY x2.s_name,x2.i_name
+
