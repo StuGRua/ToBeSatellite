@@ -1,4 +1,4 @@
-https://121.36.214.185/SOP/
+﻿https://121.36.214.185/SOP/
 
 1.1
 with test as
@@ -187,4 +187,99 @@ SELECT x2.s_name,x2.i_name
 FROM x1 JOIN x2 ON x1.s_id=x2.s_id
 WHERE x1.t_id=x2.i_id
 GROUP BY x2.s_name,x2.i_name
-
+-------------------
+1.1
+select NAME,TITLE,count(takes.COURSE_ID)
+from takes join student on takes.ID=student.ID join course on takes.COURSE_ID=course.COURSE_ID
+group by NAME,TITLE
+having count(takes.COURSE_ID)>=2
+1.2
+select ID,NAME
+from student
+where student.ID not in (select ID
+     from takes
+    group by ID)
+1.3
+select TITLE,section.SEC_ID,section.YEAR,section.SEMESTER
+from section join course on section.COURSE_ID=course.COURSE_ID join takes on section.COURSE_ID=takes.COURSE_ID and section.SEC_ID=takes.SEC_ID and section.SEMESTER=takes.SEMESTER and section.YEAR=takes.YEAR
+where takes.GRADE is null
+2.1
+select course.COURSE_ID,TITLE,count(SEC_ID)
+from course  left join (select COURSE_ID,SEC_ID,SEMESTER,YEAR
+                    from section
+                    group by COURSE_ID,SEC_ID,SEMESTER,YEAR) e on course.COURSE_ID=e.COURSE_ID
+where course.COURSE_ID not in (select COURSE_ID
+                              from takes
+                              where GRADE like '%F%'
+                              group by COURSE_ID
+                              )
+group by course.COURSE_ID,TITLE
+2.2
+select s.COURSE_ID,s.YEAR,s.SEMESTER,s.SEC_ID,
+sum(case when t.GRADE in ('A','A+','A-') then 1 else 0 end),
+sum(case when t.GRADE in ('B','B+','B-') then 1 else 0 end),
+sum(case when t.GRADE in ('C','C+','C-') then 1 else 0 end),
+sum(case when t.GRADE in ('D','D+','D-') then 1 else 0 end),
+sun(case when t.GRADE in ('F','F+','F-') then 1 else 0 end),
+sum(case when t.GRADE is null then 1 else 0 end)
+from section s join takes t on s.COURSE_ID=t,COURSE_ID and s.SEC_ID=t.SEC_ID and s.SEMESTER=t.SEMESTER and s.YEAR=t.YEAR
+group by s.COURSE_ID,s.SEC_ID,s.SEMESTER,s.YEAR
+2.3
+with ss as(
+select TIME_SLOT_ID,sum(((END_HR-START_HR)*60+(END_MIN-START_MIN))/50) time
+from time_slot
+group by TIME_SLOT_ID,END_HR,END_MIN,START_HR,START_MIN
+)
+select COURSE_ID,YEAR,SEMESTER,count(SEC_ID),sum(time)
+from section join ss on section.TIME_SLOT_ID=ss.TIME_SLOT_ID
+group by COURSE_ID,YEAR,SEMESTER
+2.4
+with ss as (
+select NAME,DEPT_NAME,ID,I_ID
+from student join advisor on ID=S_ID)
+select ss.NAME,instructor.NAME
+from ss join instructor on ss.I_ID=instructor.ID
+where (ss.ID,instructor.ID) in (select takes.ID,teaches.ID
+                                from takes join teaches on takes.COURSE_ID=teaches.COURSE_ID and takes.SEC_ID=teaches.SEC_ID and takes.SEMESTER=teaches.SEMESTER and takes.YEAR=teaches.YEAR)
+3.1
+3.2
+select s.NAME,s.DEPT_NAME
+from student s
+where not exists((select distinct c1.COURSE_ID
+from student s1 join department d1 on s1.DEPT_NAME=d1.DEPT_NAME join course c1 on c1.DEPT_NAME=d1.DEPT_NAME
+where s1.DEPT_NAME=s.DEPT_NAME)
+except (select distinct t2.COURSE_ID
+from takes t2
+where t2.GRADE<'F' and t2.ID=s.ID))
+3.3
+with c as(
+select *,row_number() over(order by ID) total 
+from student)
+select ID,NAME
+from c 
+where total>=6 and total<=10
+3.4
+select student.ID,NAME,((select count(*)
+                        from (select distinct COURSE_ID
+                                                from takes
+                                                where student.ID=takes.ID and GRADE is not null))-(select count(*)
+                                      from (select distinct COURSE_ID
+                                      from takes
+                                      where student.ID=takes.ID and GRADE<'F' and GRADE is not null)))
+from student
+where ((select count(*)
+from (select distinct COURSE_ID
+from takes
+where student.ID=takes.ID and GRADE is not null))-(select count(*)
+from (select distinct COURSE_ID
+from takes
+where student.ID=takes.ID and GRADE<'F' and GRADE is not null)))>0
+3.5
+select student.ID,NAME,COURSE_ID,count(*),(select count(*)
+                                          from takes t
+                                          where t1.COURSE_ID=t.COURSE_ID and t.ID=student.ID and GRADE like '%F%')
+from student join takes t1 on student.ID=t1.ID
+where (select count(*)
+      from takes t2
+      where t2.ID=t1.ID and t2.COURSE_ID=t1.COURSE_ID)>1
+group by student.ID,NAME,COURSE_ID

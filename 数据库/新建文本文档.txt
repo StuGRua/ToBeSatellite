@@ -1,0 +1,11 @@
+select s1.NAME,s1.DEPT_NAME
+from(select t1.GRADE,t1.ID,c2.DEPT_NAME,t1.COURSE_ID from takes t1 join 
+course c2 on t1.COURSE_ID = c2.COURSE_ID)temp
+join student s1 on temp.ID = s1.ID
+where temp.GRADE is not null and temp.GRADE not like '%F%'  and temp.DEPT_NAME=s1.DEPT_NAME
+
+having count(temp.COURSE_ID)=
+(select count(c1.COURSE_ID)con
+    from course c1 right join department d1 on c1.DEPT_NAME=d1.DEPT_NAME
+    where s1.DEPT_NAME=d1.DEPT_NAME
+)
