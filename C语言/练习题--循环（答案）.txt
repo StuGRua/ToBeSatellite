@@ -1,0 +1,1362 @@
+循环
+一、选择题
+1、设有程序段
+	int k=10;
+	while(k=0) k=k-1;
+   则下面叙述中正确的是( C )
+   (A) while循环执行10次
+   (B) 循环是无限循环
+   (C) 循环体语句一次也不执行
+   (D) 循环体语句执行一次
+2、设有以下程序段
+	int x=0,s=0;
+	while(!x!=0) s+=++x;
+	printf("%d",s);
+   则( B )
+   (A) 运行程序段后输出0
+   (B) 运行程序段后输出1
+   (C) 程序段中的控制表达式是非法的
+   (D) 程序段执行无限次
+3、语句while(!E); 中的表达式!E等价于( A )
+   (A) E==0
+   (B) E!=1
+   (C) E!=0
+   (D) E==1
+4、下面程序段的运行结果是( A )
+	a=1; b=2; c=2;
+	while(a<b<c) {t=a; a=b; b=t; c--;}
+	printf("%d,%d,%d",a,b,c);
+   (A) 1,2,0
+   (B) 2,1,0
+   (C) 1,2,1
+   (D) 2,1,1
+5、下面程序段的运行结果是( D )
+	x=y=0;
+	while(x<15) y++,x+=++y;
+	printf("%d,%d",y,x);
+   (A) 20,7
+   (B) 6,12
+   (C) 20,8
+   (D) 8,20
+6、下面程序段的运行结果是( C )
+	int n=0;
+	while(n++<=2); printf("%d",n);
+   (A) 2
+   (B) 3
+   (C) 4
+   (D) 有语法错
+7、设有程序段
+	t=0;
+	while(printf("*"))  //printf函数类型是int，返回值表示输出的字符数。
+	{
+		t++;
+		if(t<3) break;
+	}
+   下面描述正确的是( D )
+   (A) 其中循环控制表达式与0等价
+   (B) 其中循环控制表达式与'0'等价
+   (C) 其中循环控制表达式是不合法的
+   (D) 以上说法都不对
+8、下面程序的功能是将从键盘输入的一对数，由小到大排序输出。当输入一对相等数时结束循环，①处应选择( B )
+	#include <stdio.h>
+	void main()
+	{
+		int a,b,t;
+		scanf("%d%d",&a,&b);
+		while(  ①  )
+		{
+			if(a>b) {t=a; a=b; b=t}
+			printf("%d,%d\n",a,b);
+			scnaf("%d%d",&a,&b);
+		}
+	}
+   (A) !a=b
+   (B) a!=b
+   (C) a==b
+   (D) a=b
+9、下面程序的功能是从键盘输入的一组字符中统计出大写字母的个数m和小写字母的个数n，并输出m、n中的较大者，①处应选择( C )②处应选择( A )
+	#include <stdio.h>
+	void main()
+	{
+		int m=0,n=0;
+		char c;
+		while((  ①  )!='\n')
+		{
+			if(c>='A'&&c<='Z') m++;
+			if(c>='a'&&c<='z') n++;
+		}
+		printf("%d\n",m<n?  ②  )
+	}
+① (A) c==getchar()
+   (B) getchar()
+   (C) c=getchar()
+   (D) scanf("%c",c)
+② (A) n:m
+   (B) m:n
+   (C) m:m
+   (D) n:n
+10、下面程序的功能是将小写字母变成对应大写字母后的第二个字母。其中y变成A，z变成B。请选择①( D )②( C )
+	#include <stdio.h>
+	void main()
+	{
+		char c;
+		while((c=getchar())!='\n')
+		{
+			if(c>='a'&&c<='z')
+			{
+				①;
+				if(c>'Z'&&c<='Z'+2)
+					②;
+			}
+			printf("%c",c);
+		}
+	}
+① (A) c+=2
+   (B) c-=32
+   (C) c=c+32+2
+   (D) c-=30
+② (A) c='B'
+   (B) c='A'
+   (C) c-=26
+   (D) c=c+26
+11、下面程序的功能是在输入的一批正整数中求出最大者，输入0结束循环，请选择①( B )
+	#include <stdio.h>
+	void main()
+	{
+		int a,max=0;
+		scanf("%d",&a);
+		while(  ①  )
+		{
+			if(max<a) max=a;
+			scanf("%d",&a);
+		}
+		printf("%d",max);
+	}
+① (A) a==0
+   (B) a
+   (C) !a==1
+   (D) !a
+12、下面程序的运行结果是( C )
+	#include <stdio.h>
+	void main()
+	{
+		int num=0;
+		while(num<=2)
+		{
+			num++;
+			printf("%d\n",num);
+		}
+	}
+   (A) 1
+   (B) 1
+       2
+   (C) 1
+       2
+       3
+   (D) 1
+       2
+       3
+       4
+13、若运行以下程序时，从键盘输入2473〈CR〉（〈CR〉表示回车），则下面程序的运行结果是( A )
+	#include<stdio.h>
+	void main()
+	{
+		int c;
+		while((c=getchar())!='\n')
+			switch(c-'2')
+			{
+			case 0:
+			case 1: putchar(c+4);
+			case 2: putchar(c+4); break;
+			case 3: putchar(c+3);
+			default: putchar(c+2); break;
+			}
+		printf("\n");
+	}
+   (A) 668977
+   (B) 668966
+   (C) 66778777
+   (D) 6688766
+14、C语言中while和do-while循环的主要区别是( A )
+   (A) do-while的循环体至少无条件执行一次
+   (B) while的循环控制条件比do-while的循环控制条件严格
+   (C) do-while允许从外部转到循环体内
+   (D) do-while的循环体不能是复合语句
+15、以下能正确计算1×2×3×...×10的程序段是( C )
+   (A) do{i=1; s=1;
+	  s=s*i;
+	  i++;
+	 }while(i<=10);
+   (B) do{i=1;s=0;
+	  s=s*i;
+	  i++;
+	 }while(i<=10);
+   (C) i=1; s=1;
+       do{s=s*i;
+	  i++;
+	 }while(i<=10);
+   (D) i=1; s=0;
+       do{s=s*i;
+	  i++;
+	 }while(i<=10);
+16、以下程序段( C )
+	x=-1;
+	do{x=x*x;}while(!x);
+   (A) 是死循环
+   (B) 循环执行二次
+   (C) 循环执行一次
+   (D) 有语法错误
+17、以下描述中正确的是( C )  //此题的C答案也不对，语法上while表达式的值允许恒为false或true。
+   (A) 由于do-while循环中循环体语句只能是一条可执行语句，所以循环体内不能使用复合语句
+   (B) do-while循环由do开始，用while结束，在while(表达式)后面不能写分号
+   (C) 在do-while循环体中，一定要有能使while后面表达式的值变为零（“假”）的操作
+   (D) do-while循环中，根据情况可以省略while
+18、若有如下语句
+	int x=3;
+	do{printf("%d\n",x-=2);}while(!(--x));
+    则上面程序段( B )
+   (A) 输出的是1
+   (B) 输出的是1和-2
+   (C) 输出的是3和0
+   (D) 是死循环
+19、下面程序的功能是计算正整数2345的各位数字平方和，请选择填空。①( B )②( C )
+	#include<stdio.h>
+	void main()
+	{
+		int n,sum=0;
+		n=2345;
+		do{
+			sum=sum+  ①  ;
+			n=  ②  ;
+		}while(n);
+		printf("sum=%d",sum);
+	}
+① (A) n%10
+   (B) (n%10)*(n%10)
+   (C) n/10
+   (D) (n/10)*(n/10)
+② (A) n/1000
+   (B) n/100
+   (C) n/10
+   (D) n%10
+20、下面程序是从键盘输入学号，然后输出学号中百位数字是3的学号，输入0时结束循环。请选择填空。①( B )②( C )
+	#include<stdio.h>
+	void main()
+	{
+		long int num;
+		scanf("%ld",&num);
+		do{if(  ①  ) printf("%ld",num);
+			scanf("%ld",&num);
+		}while(  ②  );
+	}
+① (A) num%100/10==3
+   (B) num/100%10==3
+   (C) num%10/10==3
+   (D) num/10%10==3
+② (A) !num
+   (B) num>0==0
+   (C) !num==0
+   (D) !num!=0
+21、等比数列的第一项a=1，公比q=2，下面程序的功能是求满足前n项和小于100的最大n，请选择填空。①( B )②( D )
+	#include<stdio.h>
+	void main()
+	{
+		int a,q,n,sum;
+		a=1; q=2; n=sum=0;
+		do{  ①  ;
+			++n; a*=q;
+		}while(sum<100);
+		  ②  ;
+		printf("%d\n",n);
+	}
+① (A) sum++
+   (B) sum+=a
+   (C) sum*=a
+   (D) a+=sum
+② (A) n=n-2
+   (B) n=n
+   (C) n++
+   (D) n-=1
+22、下面程序的功能是把316表示为两个加数的和，使两个加数分别能被13和11整除。请选择填空。①( B )
+	#include<stdio.h>
+	void main()
+	{
+		int i=0,j,k;
+		do{i++; k=316-13*i;} while(  ①  );
+		j=k/11;
+		printf("316=13*%d+11*%d",i,j);
+	}
+① (A) k/11
+   (B) k%11
+   (C) k/11==0
+   (D) k%11==0
+23、下面程序的运行结果是( D )
+	#include<stdio.h>
+	void main()
+	{
+		int y=10;
+		do{y--;}while(--y);
+		printf("%d\n",y--);
+	}
+   (A) -1
+   (B) 1
+   (C) 8
+   (D) 0
+24、若运行以下程序时，从键盘输入ADescriptor〈CR〉（〈CR〉表示回车），则下面程序的运行结果是( D )
+	#include<stdio.h>
+	void main()
+	{
+		char c;
+		int v0=0,v1=0,v2=0;
+		do{
+			switch(c=getchar())
+			{
+			case 'a': case 'A':
+			case 'e': case 'E':
+			case 'i': case 'I':
+			case 'o': case 'O':
+			case 'u': case 'U': v1+=1;
+			default: v0+=1; v2+=1;
+			}
+		}while(c!='\n');
+		printf("v0=%d,v1=%d,v2=%d\n",v0,v1,v2);
+	}
+   (A) v0=7,v1=4,v2=7
+   (B) v0=8,v1=4,v2=8
+   (C) v0=11,v1=4,v2=11
+   (D) v0=12,v1=4,v2=12
+25、下面程序的运行结果是( B )
+	#include<stdio.h>
+	void main()
+	{
+		int a=1,b=10;
+		do{ b-=a; a++; } while(b--<0);
+		printf("a=%d,b=%d\n",a,b);
+	}
+   (A) a=3,b=11
+   (B) a=2,b=8
+   (C) a=1,b=-1
+   (D) a=4,b=9
+26、下面有关for循环的正确描述是( D )
+   (A) for循环只能用于循环次数已经确定的情况
+   (B) for循环是先执行循环体语句，后判断表达式
+   (C) 在for循环中，不能用break语句跳出循环体
+   (D) for循环的循环体语句中，可以包含多条语句，但必须用花括号括起来
+27、对for(表达式1;  ; 表达式3)可理解为( B )
+   (A) for(表达式1; 0; 表达式3)
+   (B) for(表达式1; 1; 表达式3)
+   (C) for(表达式1; 表达式1; 表达式3)
+   (D) for(表达式1; 表达式3; 表达式3)
+28、若i为整型变量，则以下循环执行次数是( B )
+	for(i=2;i==0;) printf("%d",i--);
+   (A) 无限次
+   (B) 0次
+   (C) 1次
+   (D) 2次
+29、以下for循环的执行次数是( C )
+	for(x=0,y=0;(y=123)&&(x<4);x++);
+   (A) 是无限循环
+   (B) 循环次数不定
+   (C) 执行4次
+   (D) 执行3次
+30、以下不是无限循环的语句为( A )
+   (A) for(y=0,x=1;x>++y;x=i++) i=x;
+   (B) for( ; ; x++=i);
+   (C) while(1){x++;}
+   (D) for(i=10;  ;i--) sum+=i;
+31、下面程序段的运行结果是( C )
+	for(y=1;y<10;) y=((x=3*y,x+1),x-1);
+	printf("x=%d,y=%d",x,y);
+   (A) x=27,y=27
+   (B) x=12,y=13
+   (C) x=15,y=14
+   (D) x=y=27
+32、下面程序段的运行结果是( D )
+	for(x=3;x<6;x++) printf((x%2)?("**%d"):("##%d\n"),x);
+   (A) **3
+       ##4
+       **5
+   (B) ##3
+       **4
+       ##5
+   (C) ##3
+       **4##5
+   (D) **3##4
+       **5
+33、下列程序段不是死循环的是( C )
+   (A) int i=100;
+       while(1)
+       {
+	  i=i%100+1;
+	  if(i>100) break;
+       }
+   (B) for(  ;  ;  );
+   (C) int k=0;
+       do{++k;}while(k>=0);
+   (D) int s=36;
+       while(s); --s;
+34、执行语句for(i=1;i++<4; ); 后变量i的值是( C )
+   (A) 3
+   (B) 4
+   (C) 5
+   (D) 不定
+35、有一堆零件（100到200之间），如果分成4个零件一组的若干组，则多2个零件；若分成7个零件一组，则多3个零件；若分成9个零件一组，则多5个零件。下面程序是求这堆零件总数，请选择填空。①( D )
+	#include<stdio.h>
+	void main()
+	{
+		int i;
+		for(i=100;i<200;i++)
+			if((i-2)%4==0)
+				if(!((i-3)%7))
+					if(  ①  )
+						printf("%d",i);
+	}
+   (A) i%9=5
+   (B) i%9!=5
+   (C) (i-5)%9!=0
+   (D) i%9==5
+36、下面程序的功能是计算1至50中是7的倍数的数值之和，请选择填空。①( D )
+	#include<stdio.h>
+	void main()
+	{
+		int i,sum=0;
+		for(i=1;i<=50;i++)
+			if(  ①  ) sum+=i;
+		printf("%d",sum);
+	}
+   (A) (int)(i/7)==i/7
+   (B) (int)i/7==i/7
+   (C) i%7=0
+   (D) i%7==0
+37、下面程序的功能是计算1至10之间的奇数之和及偶数之和。请选择填空。①( B ) ②( B )
+	#include<stdio.h>
+	void main()
+	{
+		int a,b,c,i;
+		a=c=0;
+		for(i=0;i<=10;i+=2)
+		{
+			a+=i;
+			  ①  ;
+			c+=b;
+		}
+		printf("偶数之和=%d\n",a);
+		printf("奇数之和=%d\n",  ②  );
+	}
+① (A) b=i--
+   (B) b=i+1
+   (C) b=i++
+   (D) b=i-1
+② (A) c-10
+   (B) c
+   (C) c-11
+   (D) c-b
+38、下面程序的运行结果是( B )
+	#include<stdio.h>
+	void main()
+	{
+		int i;
+		for(i=1;i<=5;i++)
+			switch(i%5)
+			{
+			case 0: printf("*"); break;
+			case 1: printf("#"); break;
+			default: printf("\n");
+			case 2: printf("&");
+			}
+	}
+   (A) #&&&*
+   (B) #&
+       &
+       &*
+   (C) #
+       &
+       &
+       &
+       *
+   (D) #&
+
+       *
+39、下面程序的运行结果是( D )
+	#include<stdio.h>
+	void main()
+	{
+		int x,i;
+		for(i=1;i<=100;i++)
+		{
+			x=i;
+			if(++x%2==0)
+				if(++x%3==0)
+					if(++x%7==0)
+						printf("%d ",x);
+		}
+	}
+   (A) 39 81
+   (B) 42 84
+   (C) 26 68
+   (D) 28 70
+40、下面程序段的功能是计算1000!的末尾含有多少个零。请选择填空。（提示：只要算出1000!中含有因数5的个数即可）①( C )
+	for(k=0,i=5;i<=1000;i+=5)
+	{
+		m=i;
+		while(  ①  ){k++; m=m/5;}
+	}
+   (A) m%5=0
+   (B) m=m%5==0
+   (C) m%5==0
+   (D) m%5!=0
+41、下面程序的功能是求算式xyz+yzz=532中x,y,z的值（其中xyz和yzz分别表示一个三位数），请选择填空。①( C )②( D )
+	#include<stdio.h>
+	void main()
+	{
+		int x,y,z,i,result=532;
+		for(x=1; x<10; x++)
+			for(y=1; y<10; y++)
+				for(  ①  ; z<10; z++)
+				{
+					i=100*x+10*y+z+100*y+10*z+z;
+					if(  ②  ) printf("x=%d,y=%d,z=%d\n",x,y,z);
+				}
+	}
+① (A) z=x
+   (B) z=1
+   (C) z=0
+   (D) z=y
+② (A) i/result==1
+   (B) i=result
+   (C) i!=result
+   (D) i==result
+42、下面程序是输出一个正整数等差数列的前十项，此数列前四项之和及之积分别是26和880，请选择填空。①( C )②( A )
+	#include<stdio.h>
+	void main()
+	{
+		int a,d,i,s,f,x;	/* a是第一项 */
+		for(a=1;a<30;a++)
+			for(d=1;  ①  ;d++)
+			{
+				s=0; f=1; x=a;
+				for(i=1;i<=4;i++)
+				{
+					s=s+x;
+					f=f*x;
+					x=x+d;
+				}
+				if(s==26&&f==880)
+					for(i=0;i<10;i++)
+						printf("%3d",  ②  );
+			}
+		printf("\n");
+	}
+① (A) d<=a
+   (B) 空
+   (C) d<=5
+   (D) d<a
+② (A) a+i*d
+   (B) i*d
+   (C) a+(i+1)*d
+   (D) a+d
+43、下面程序的运行结果是( D )
+	#include<stdio.h>
+	void main()
+	{
+		int i,b,k=0;
+		for(i=1;i<=5;i++)
+		{
+			b=i%2;
+			while(b-->=0) k++;
+		}
+		printf("%d,%d",k,b);
+	}
+   (A) 3,-1
+   (B) 8,-1
+   (C) 3,0
+   (D) 8,-2
+44、以下正确的描述是( B )
+   (A) continue语句的作用是结束整个循环的执行
+   (B) 只能在循环体内和switch语句体内使用break语句
+   (C) 在循环体内使用break语句或continue语句的作用相同
+   (D) 从多层循环嵌套中退出时，只能使用goto语句
+45、下面程序段( D )
+	for(t=1;t<=100;t++)
+	{
+		scanf("%d",&x);
+		if(x<0) continue;
+		printf("%3d",t);
+	}
+   (A) 当x<0时整个循环结束
+   (B) x>=0时什么也不输出
+   (C) printf函数永远也不执行
+   (D) 最多允许输出100个非负整数
+46、下面程序段( C )
+	x=3;
+	do{
+		y=x--;
+		if(!y){printf("x"); continue;}
+		printf("#");
+	}while(1<=x<=2);
+   (A) 将输出##
+   (B) 将输出##*
+   (C) 是死循环
+   (D) 含有不合法的控制表达式
+47、以下是死循环的程序段是( C )
+   (A) for(i=1;  ;  )
+       {
+	   if(++i%2==0) continue;
+	   if(++i%3==0) break;
+       }
+   (B) i=32767;
+       do{if(i<0) break;}while(++i);
+   (C) for(i=1;  ;  ) if(++i<10) continue;
+   (D) i=1;
+       while(i--);
+48、以下描述正确的是( C )
+   (A) goto语句只能用于退出多层循环
+   (B) switch语句中不能出现continue语句
+   (C) 只能用continue语句来终止本次循环
+   (D) 在循环中break语句不能独立出现
+49、与下面程序段等价的是( C )
+	for(n=100;n<=200;n++)
+	{
+		if(n%3==0) continue;
+		printf("%4d",n);
+	}
+   (A) for(n=100;(n%3)&&n<=200;n++) printf("%4d",n);
+   (B) for(n=100;(n%3)||n<=200;n++) printf("%4d",n);
+   (C) for(n=100;n<=200;n++) if(n%3!=0) printf("%4d",n);
+   (D) for(n=100;n<=200;n++)
+       {
+	   if(n%3) printf("%4d",n);
+	   else continue;
+	   break;
+	}
+50、下面程序的功能是将从键盘输入的偶数写成两个素数之和。请选择填空。①( B )
+	#include<stdio.h>
+	#include<math.h>
+	void main()
+	{
+		int a,b,c,d;
+		scanf("%d",&a);
+		for(b=3;b<=a/2;b+=2)
+		{
+			for(c=2;c<=sqrt(b);c++) if(b%c==0) break;
+			if(c>sqrt(b)) d=  ①  ; else continue;
+			for(c=2;c<=sqrt(d);c++) if(d%c==0) break;
+			if(c>sqrt(d)) printf("%d=%d+%d\n",a,b,d);
+		}
+	}
+   (A) a+b
+   (B) a-b
+   (C) a*b
+   (D) a/b
+51、下面程序的运行结果是( D )
+	#include<stdio.h>
+	void main()
+	{
+		int k=0; char c='A';
+		do{
+			switch(c++)
+			{
+			case 'A': k++; break;
+			case 'B': k--;
+			case 'C': k+=2; break;
+			case 'D': k=k%2; continue;
+			case 'E': k=k*10; break;
+			default: k=k/3;
+			}
+		}while(c<'G');
+		printf("k=%d\n",k);
+	}
+   (A) k=3
+   (B) k=4
+   (C) k=2
+   (D) k=0
+52、若运行以下程序时，从键盘输入3.6 2.4〈CR〉（〈CR〉表示回车），则下面程序的运行结果是( B )
+	#include<math.h>
+	#include<stdio.h>
+	void main()
+	{
+		float x,y,z;
+		scanf("%f,%f",&x,&y);
+		z=x/y;
+		while(1)
+		{
+			if(fabs(z)>1.0) {x=y;y=z;z=x/y;}
+			else break;
+		}
+		printf("%f\n",y);
+	}
+   (A) 1.500000
+   (B) 1.600000
+   (C) 2.000000
+   (D) 2.400000
+53、下面程序的运行结果是( B )
+	#include<stdio.h>
+	void main()
+	{
+		int a,b;
+		for(a=1,b=1;a<=100;a++)
+		{
+			if(b>=20) break;
+			if(b%3==1) {b+=3; continue;}
+			b-=5;
+		}
+		printf("%d\n",a);
+	}
+   (A) 7
+   (B) 8
+   (C) 9
+   (D) 10
+54、下面程序的运行结果是( B )
+	#include<stdio.h>
+	void main()
+	{
+		int i,j,x=0;
+		for(i=0;i<2;i++)
+		{
+			x++;
+			for(j=0;j<=3;j++)
+			{
+				if(j%2) continue;
+				x++;
+			}
+			x++;
+		}
+		printf("x=%d\n",x);
+	}
+   (A) x=4
+   (B) x=8
+   (C) x=6
+   (D) x=12
+55、下面程序的运行结果是( A )
+	#include"stdio.h"
+	void main()
+	{
+		int i;
+		for(i=1;i<=5;i++)
+		{
+			if(i%2) printf("*");
+			else continue;
+			printf("#");
+		}
+		printf("$\n");
+	}
+   (A) *#*#*#$
+   (B) #*#*#*$
+   (C) *#*#$
+   (D) #*#*$
+56、下面程序的运行结果是( A )
+	void main()
+	{
+		int i,j,a=0;
+		for(i=0;i<2;i++)
+		{
+			for(j=0;j<4;j++)
+			{
+				if(j%2) break;
+				a++;
+			}
+			a++;
+		}
+		printf("%d\n",a);
+	}
+   (A) 4
+   (B) 5
+   (C) 6
+   (D) 7
+二、填空题
+57、下面程序段是从键盘输入的字符中统计数字字符的个数，用换行结束循环，请填空。
+	int n=0,c;
+	c=getchar();
+	while(________) //c!='/n'
+	{
+		if(________) n++; //c>='0'&&c<='9'
+		c=getchar();
+	}
+58、下面程序的功能是用公式π*π/6≈1/1*1+1/2*2+1/3*3+...+1/n*n求π的近似值，直到最后一项的值小于10的-6次方为止，请填空。
+	#include<stdio.h>
+	#include<math.h>
+	void main()
+	{
+		long i=1;
+		________pi=0; //double
+		while(i*i<=10e+6) {pi=________;i++;} //pi+1.0/(i*i)
+		pi=sqrt(6.0*pi);
+		printf("pi=%10.6f\n",pi);
+	}
+59、有1020个西瓜，第一天卖一半多两个，以后每天卖剩下的一半多两个，问几天以后能卖完？请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int day,x1,x2;
+		day=0; x1=1020;
+		while(________){x2=________;x1=x2;day++;} //x1>0  x1/2-2 此题不妥，西瓜数有可能剩下奇数个
+		printf("day=%d\n",day);
+	}
+60、下面程序的功能是用“辗转相除法”求两个正整数的最大公约数。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int r,m,n;
+		scanf("%d%d",&m,&n);
+		if(m<n) ________; //r=m,m=n,n=r
+		r=m%n;
+		while(r) {m=n;n=r;r=________;} //m%n
+		printf("%d\n",n);
+	}
+61、当运行以下程序时，从键盘键入right?〈CR〉（〈CR〉代表回车），则下面程序的运行结果是________。 //sjhiu
+	#include<stdio.h>
+	void main()
+	{
+		char c;
+		while((c=getchar())!='?') putchar(++c);
+	}
+62、下面程序的运行结果是________。 //254
+	#include<stdio.h>
+	void main()
+	{
+		int a,s,n,count;
+		a=2; s=0; n=1; count=1;
+		while(count<=7){n=n*a; s=s+n; ++count;}
+		printf("s=%d",s);
+	}
+63、当运行以下程序时，从键盘输入China#〈CR〉（〈CR〉表示回车），则下面程序的运行结果是________。 //5,5
+	#include<stdio.h>
+	void main()
+	{
+		int v1=0,v2=0;char ch;
+		while((ch=getchar())!='#')
+			switch(ch)
+			{
+			case 'a':
+			case 'h':
+			default: v1++;
+			case 'o': v2++;
+			}
+		printf("%d,%d\n",v1,v2);
+	}
+64、执行下面程序段后，k值是________。 //36
+	int k=1,n=263;
+	do{ k*=n%10; n/=10;}while(n);
+65、下面程序段中循环体的执行次数是________。 //3
+	int a=10;
+	int b=0;
+	do{b+=2;a-=2+b;}while(a>=0);
+66、下面程序段的运行结果是________。 //**
+	x=2;
+	do{printf("*");x--;}while(!x==0);
+67、下面程序段的运行结果是________。 //-5
+	i=1;a=0;s=1;
+	do{a=a+s*i;s=-s;i++;}while(i<=10);
+	printf("a=%d",a);
+68、下面程序的功能是用do-while语句求1至1000之间满足“用3除余2；用5除余3；用7除余2”的数，且一行只打印五个数。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int i=1;j=0;
+		do{
+			if(________) //i%3==2&&i%5==3&&i%7==2
+			{
+				printf("%4d",i);
+				j=j+1;
+				if(________) printf("\n"); //j%5==0
+			}
+			i=i+1;
+		}while(i<1000);
+	}
+69、下面程序的功能是统计正整数的各位数字中零的个数，并求各位数字中的最大者。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int n,count,max,t;
+		count=max=0;
+		scanf("%d",&n);
+		do{
+			t=________; //n%10
+			if(t==0) ++count;
+			else if(max<t) ________; //max=t
+			n/=10;
+		}while(n);
+		printf("count=%d,max=%d",count,max);
+	}
+70、等差数列的第一项a=2，公差d=3，下面程序的功能是在前n项和中，输出能被4整除的所有的和。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int a,d,sum;
+		a=2;d=3;sum=0;
+		do{
+			sum+=a;
+			a+=d;
+			if(________) printf("%d\n",sum); //sum%4==0
+		}while(sum<200);
+	}
+71、下面程序的功能是求11的11次方的个、十、百位上的数字之和。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int i,s=1,m=0;
+		for(i=1;i<=11;i++) s=s*11%1000;
+		do{ m+=________; s=________;}while(s); //s%10  s/10
+		printf("m=%d\n",m);
+	}
+72、当运行以下程序时，从键盘输入12345-1〈CR〉（〈CR〉表示回车），则下面程序的运行结果是________。 //k=12344 n=-1
+	#include<stdio.h>
+	void main()
+	{
+		int k=0,n;
+		do{scanf("%d",&n);k+=n;}while(n!=-1);
+		printf("k=%d n=%d\n",k,n);
+	}
+73、下面程序的运行结果是________。 //x=1,y=20
+	#include<stdio.h>
+	void main()
+	{
+		int i,x,y;
+		i=x=y=0;
+		do{
+			++i;
+			if(i%2!=0){x=x+i;i++;}
+			y=y+i++;
+		}while(i<=7);
+		printf("x=%d,y=%d\n",x,y);
+	}
+74、下面程序的运行结果是________。 //1,3,7,15,
+				   //31,63,
+	#include<stdio.h>
+	void main()
+	{
+		int a,b,i;
+		a=1;b=3;i=1;
+		do{
+			printf("%d,%d,",a,b);
+			a=(b-a)*2+b;
+			b=(a-b)*2+a;
+			if(i++%2==0) printf("\n");
+		}while(b<100);
+	}
+75、当运行以下程序时，从键盘输入-1 0〈CR〉（〈CR〉表示回车），则下面程序的运行结果是________。 //m=4 n=2
+	#include<stdio.h>
+	void main()
+	{
+		int a,b,m,n;
+		m=n=1;
+		scanf("%d%d",&a,&b);
+		do{
+			if(a>0){m=2*n;b++;}
+			else{n=m+n;a+=2;b++;}
+		}while(a==b);
+		printf("m=%d n=%d",m,n)
+	}
+76、下面程序段是找出整数的所有因子，请填空。
+	scanf("%d",&x);
+	i=1;
+	for(  ;________;  ) //i<=x/2
+	{
+		if(x%i==0) printf("%3d",i);
+		i++;
+	}
+77、鸡兔共有30只，脚共有90个，下面程序段是计算鸡兔各有多少只，请填空。
+	for(x=1;x<=29;x++)
+	{
+		y=30-x;
+		if(________) printf("%d,%d\n",x,y); //x*2+y*4==90
+	}
+78、下面程序段的运行结果是________。 //-1
+	for(a=1,i=-1;-1<=i<1;i++)
+	{a++;printf("%2d",a);}
+	printf("%2d",i);
+79、若for循环用以下形式表示：
+	for(表达式1;表达式2;表达式3) 循环体语句
+    则执行语句for(i=0;i<3;i++) printf("*"); 时，表达式1执行________次，表达式3执行________次。 //1  3
+80、下面程序的功能是计算1-3+5-7+...-99+101的值，请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int i,t=1,s=0;
+		for(i=1;i<=101;i+=2)
+		{________; s=s+t;________;} //t=t*i  t=-t/i  此题出得不太好
+		printf("%d\n",s);
+	}
+81、以下程序是用梯形法求sin(x)*cos(x)的定积分。求定积分的公式为：
+	s=(h/2)*[f(a)+f(b)]+h*∑f(xi)
+	其中xi=a+ih,h=(b-a)/(n+1)
+	设a=0,b=1.2为积分上下限，积分区间分割数n=99，请填空。
+	#include<stdio.h>
+	#include<math.h>
+	void main()
+	{
+		int i,n; double h,s,a,b;
+		printf("Input a,b:");
+		scanf("%lf%lf",________); //&a,&b
+		n=100; h=________; //fabs(b-a)/n
+		s=0.5*(sin(a)*cos(a)+sin(b)*cos(b));
+		for(i=1;i<=n-1;i++) s+=________; //sin(a+i*h)*cos(a+i*h)
+		s*=h;
+		printf("s=%10.4lf\n",s);
+	}
+82、以下程序的功能是根据公式e=1+1/1!+1/2!+1/3!+...求e的近似值，精度要求为10的-6次方。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int i; double e,new;
+		________; new=1.0; //e=1.0
+		for(i=1;________;i++) //new>=1e-6
+		{
+			new/=(double)i;
+			e+=new;
+		}
+		printf("e=%f\n",e);
+	}
+83、下面程序的运行结果是________。 //sum=34
+	#include<stdio.h>
+	void main()
+	{
+		int i,t,sum=0;
+		for(t=i=1;i<=10; )
+		{
+			sum+=t; ++i;
+			if(i%3==0) t=-1;
+			else t=i;
+		}
+		printf("sum=%d",sum);
+	}
+84、下面程序的运行结果是________。 //*
+				   //#
+	#include<stdio.h>
+	void main()
+	{
+		int i;
+		for(i=1;i<=5;i++)
+			switch(i%2)
+			{
+			case 0: i++; printf("#"); break;
+			case 1: i+=2; printf("*");
+			default: printf("\n");
+			}
+	}
+85、下面程序的运行结果是________。 //****#
+	#include<stdio.h>
+	void main()
+	{
+		int i,j=4;
+		for(i=j;i<=2*j;i++)
+			switch(i/j)
+			{
+			case 0:
+			case 1: printf("*"); break;
+			case 2: printf("#");
+			}
+	}
+86、下面程序的功能是求出数字0至9可以组成多少个没有重复的三位偶数。请填空。
+	void main()
+	{
+		int n,i,j,k;
+		n=0;
+		for(i=1; i<=9; i++)
+			for(k=0; k<=8; ________) //k+=2
+				if(k!=i)
+					for(j=0; j<=9; j++)
+						if(________) //j!=i&&j!=k
+							n++;
+		printf("n\%d\n",n);
+	}
+87、下面程序的功能是输出1至100之间每位数的乘积大于每位数的和的数。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int n,k=1,s=0,m;
+		for(n=1;n<=100;n++)
+		{
+			k=1;s=0;
+			________; //m=n
+			while(________) //m
+			{
+				k*=m%10;
+				s+=m%10;
+				________; //m/=10
+			}
+			if(k>s) printf("%d",n);
+		}
+	}
+88、下面程序的功能是求1000以内的所有完全数。请填空。
+    （说明：一个数如果恰好等于它的因子之和（除自身外），则称该数为完全数，例如：6=1+2+3，6为完全数）
+	#include<stdio.h>
+	void main()
+	{
+		int a,i,m;
+		for(a=1;a<=1000;a++)
+		{
+			for(________;i<=a/2;i++) if(!(a%i)) ________; //i=1,m=0  m+=i
+			if(m==a) printf("%4d",a);
+		}
+	}
+89、下面程序的功能是完成用一元人民币换成一分、两分、五分的所有兑换方案。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int i,j,k,l=1;
+		for(i=0;i<=20;i++)
+			for(j=0;j<=50;j++)
+			{
+				k=________; //100-i*5-j*2
+				if(________) //k>=0
+				{
+					printf("  %2d %2d %2d  ",i,j,k);
+					l=l+1;
+					if(l%5==0) printf("\n");
+				}
+			}
+	}
+90、下面程序的功能是从三个红球、五个白球、六个黑球中任意取出八个球，且其中必须有白球，输出所有可能的方案。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int i,j,k;
+		printf("\n hong bai hei \n");
+		for(i=0;i<=3;i++)
+			for(_______;j<=5;j++) //j=1
+			{
+				k=8-i-j;
+				if(________) printf("  %3d %3d %3d \n",i,j,k); //k>=0&&k<=6
+			}
+	}
+91、若从键盘输入65 14〈CR〉（〈CR〉表示回车符），则下面程序的运行结果是________。 //m=1
+	#include<stdio.h>
+	void main()
+	{
+		int m,n;
+		printf("Enter m,n:");
+		scanf("%d%d",&m,&n);
+		while(m!=n)
+		{
+			while(m>n) m-=n;
+			while(n>m) n-=m;
+		}
+		printf("m=%d\n",m);
+	}
+92、下面程序的运行结果是________。 //1,-2
+	#include<stdio.h>
+	void main()
+	{
+		int y,a;
+		y=2;a=1;
+		while(y--!=-1)
+		{ do{ a*=y; a++;} while(y--); }
+		printf("%d,%d",a,y);
+	}
+93、下面程序的运行结果是________。 //******
+				   //     *
+				   //     *
+				   //******
+	#include<stdio.h>
+	void main()
+	{
+		int i,j;
+		for(i=0;i<=3;i++)
+		{
+			for(j=0;j<=5;j++)
+			{
+				if(i==0||i==3||j==5) printf("*");
+				else printf(" ");
+			}
+			printf("\n");
+		}
+	}
+94、下面程序的运行结果是________。 //####
+				   //###*
+				   //##**
+				   //#***
+	#include<stdio.h>
+	void main()
+	{
+		int i,j;
+		for(i=4;i>=1;i--)
+		{
+			for(j=1;j<=i;j++) putchar('#');
+			for(j=1;j<=4-i;j++) putchar('*');
+			putchar('\n');
+		}
+	}
+95、下面程序的运行结果是________。 //2,3
+	#include<stdio.h>
+	void main()
+	{
+		int i,k=0;
+		for(i=1;  ;i++)
+		{
+			k++;
+			while(k<i*i)
+			{
+				k++;
+				if(k%3==0 goto loop;
+			}
+		}
+	loop:	printf("%d,%d",i,k);
+	}
+96、下面程序段的运行结果是________。 //8
+	int i=1,s=3;
+	do{
+		s+=i++;
+		if(s%7==0) continue;
+		else ++i;
+	}while(s<15);
+	printf("%d",i);
+97、若用0至9之间不同的三个数构成一个三位数，下面程序将统计出共有多少种方法。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int i,j,k,count=0
+		for(i=1;i<=9;i++)
+			for(j=0;j<=9;j++)
+				if(________) continue; //i==j
+				else for(k=0;k<=9;k++)
+					if(________) count++; //k!=i&&k!=j
+		printf("%d",count);
+	}
+98、下面程序的功能是计算100至1000之间有多少个数其各位数字之和是5。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int i,s,k,count=0;
+		for(i=100;i<=1000;i++)
+		{
+			s=0;k=i;
+			while(________) {s=s+k%10; k=________;} //k  k/10
+			if(s!=5) ________; //continue
+			else count++;
+		}
+		printf("%d",count);
+	}
+99、下面程序的功能是从键盘输入的10个整数中，找出第一个能被7整除的数。若找到，打印此数后退出循环；若未找到，打印“not exist”。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int i,a;
+		for(i=1;i<=10;i++)
+		{
+			scanf("%d",&a);
+			if(a%7==0) {printf("%d",a);________;} //break
+		}
+		if(________) printf("not exist\n");  //i==11
+	}
+100、下面程序的功能是打印100以内个位数为6且能被3整除的所有数。请填空。
+	#include<stdio.h>
+	void main()
+	{
+		int i,j;
+		for(i=0; ________; i++) //i<10
+		{
+			j=i*10+6;
+			if(________) continue; j%3!=0
+			printf("%d",j);
+		}
+	}
+101、下面程序的运行结果是________。 //2 5 8 11 14
+	#include<stdio.h>
+	void main()
+	{
+		int i=1;
+		while(i<=15)
+			if(++i%3!=2) continue;
+			else printf("%d ",i);
+		printf("\n");
+	}
+102、下面程序的输出结果是________。 //i=6,k=4
+	#include<stdio.h>
+	void main()
+	{
+		int i,j,k=19;
+		while(i=k-1)
+		{
+			k-=3;
+			if(k%5==0) {i++;continue;}
+			else if(k<5) break;
+			i++;
+		}
+		printf("i=%d,k=%d\n",i,k);
+	}
+103、下面程序的运行结果是________。 //a=16 y=60
+	#include<stdio.h>
+	void main()
+	{
+		int a,y;
+		a=10;y=0;
+		do{
+			a+=2;y+=a;
+			if(y>50) break;
+		}while(a=14);
+		printf("a=%d y=%d\n",a,y);
+	}
+104、下面程序的运行结果是________。 //3 1  -1
+	#include<stdio.h>
+	void main()
+	{
+		int i=5;
+		do{
+			switch(i%2)
+			{
+			case 4: i--; break;
+			case 6: i--; continue;
+			}
+			i--; i--;
+			printf("%d ",i);
+		}while(i>0);
+	}
+三、编程题
+105、每个苹果0.8元，第一天买2个苹果，第二天开始，每天买前一天的2倍，直至购买的苹果个数达到不超过100的最大值。编写程序求每天平均花多少钱？
+
+	#include<stdio.h>
+	void main()
+	{
+		int day=0,buy=2;
+		float sum=0.0,ave;
+		do{
+			sum+=0.8*buy;
+			day++; buy*=2;
+		}while(buy<=100);
+		ave=sum/day;
+		printf("%f",ave);
+	}
+
+106、试编程序，找出1至99之间的全部同构数。同构数是这样一组数：它出现在平方数的右边。例如：5是25右边的数，25是625右边的数，5和25都是同构数。
+
+	#include<stdio.h>
+	void main()
+	{
+		int i;
+		for(i=1;i<100;i++)
+			if(i*i%10==i||i*i%100==i)
+				printf("%3d",i);
+	}
+
+107、试编程序，求一个整数任意次方的最后三位数。即求x的y次方的最后三位数，要求x,y从键盘输入。
+
+	#include<stdio.h>
+	{
+		int i,x,y,last=1;
+		printf("Input x and y:");
+		scanf("%d%d",&x,&y);
+		for(i=1;i<=y;i++)
+			last=last*x%1000;
+		printf("\nThe last 3 digits of %d**%d is:%d\n",x,y,last);
+	}
+
+108、编写程序，从键盘输入6名学生的5门成绩，分别统计出每个学生的平均成绩。
+
+	#include<stdio.h>
+	void main()
+	{
+		int i,j;
+		float g,sum,ave;
+		for(i=1;i<=6;i++)
+		{
+			sum=0;
+			for(j=1;j<=5;j++)
+			{
+				scanf("%f",&g);
+				sum+=g;
+			}
+			ave=sum/5;
+			printf("No.%d ave=%5.2f\n",i,ave);
+		}
+	}
