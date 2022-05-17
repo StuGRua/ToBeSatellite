@@ -1,0 +1,8 @@
+﻿  quick hull.cpp
+E:\qq file\1097512424\FileRecv\quick hull.cpp(46,16): warning C4018: “<”: 有符号/无符号不匹配
+E:\qq file\1097512424\FileRecv\quick hull.cpp(48,19): warning C4018: “<”: 有符号/无符号不匹配
+E:\qq file\1097512424\FileRecv\quick hull.cpp(71,15): warning C4018: “<”: 有符号/无符号不匹配
+E:\qq file\1097512424\FileRecv\quick hull.cpp(86,16): warning C4018: “<”: 有符号/无符号不匹配
+E:\qq file\1097512424\FileRecv\quick hull.cpp(118,16): warning C4018: “<”: 有符号/无符号不匹配
+E:\qq file\1097512424\FileRecv\quick hull.cpp(122,16): warning C4018: “<”: 有符号/无符号不匹配
+  可视化4.vcxproj -> F:\vs2019\程序\可视化4\Debug\可视化4.exe
